@@ -44,7 +44,7 @@ document.addEventListener('alpine:init', () => {
                     return axios.get(createCartURL)
                         .then(result => {
                             this.cartId = result.data.cart_code;
-                            localStorage["cartId"] = this.cartId
+                            // localStorage["cartId"] = this.cartId
                         })
                 }
 
@@ -79,10 +79,10 @@ document.addEventListener('alpine:init', () => {
                 })
             },
             init() {
-                const storedUserName = localStorage["username"]
-                if (storedUserName) {
-                    this.username = storedUserName
-                }
+                // const storedUserName = localStorage["username"]
+                // if (storedUserName) {
+                //     this.username = storedUserName
+                // }
 
                 axios.get("https://pizza-api.projectcodex.net/api/pizzas")
                     .then(result => {
@@ -124,7 +124,7 @@ document.addEventListener('alpine:init', () => {
                                     this.cartPizzas = [];
                                     this.cartTotal = 0.00;
                                     this.amount = "";
-                                    localStorage["cartId"] = ""
+                                    // localStorage["cartId"] = ""
                                     this.createCart()
                                 }, 3000)
                             }

@@ -1,0 +1,289 @@
+/* *{
+    outline: 1px solid green;
+} */
+
+body{
+    background-color: #264653;
+    color:black;
+    margin:0;
+    padding:0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     
+     padding: auto; 
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}
+.Medium{
+    background-color: #2a9d8f;
+}
+.Large{
+    background-color: #e9c46a;
+}
+.Small{
+    background-color: #f4a261;
+}
+.Contact{
+    background-color: #e76f51;
+}
+.pizza{
+    border: 1px solid gainsboro;
+    padding:1em;
+    margin:1em;
+    border-radius: 0.5em;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+h1{
+    text-align: center;
+}
+
+
+
+@media (min-width:760px) {
+    .container{ 
+        display: flex;
+    }
+    .pizza{
+        width: calc(100%/3);
+    }
+     
+    .Contact{
+        width:95%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    } 
+    .contacts{
+        width:20%;
+    
+    }
+    .address{
+        width:8%;
+    }
+    .cart{
+        display: flex;
+        flex-direction:column ;
+        align-items: center;
+        width: 98%;
+        border-radius: 5px;
+    }
+    .select{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+        place-items: center;
+    }
+    .selectotal{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-items: center;
+
+    }
+    .options{
+        width: 30%;
+
+    }
+    .plus-minus{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    .plus,
+    .minus{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15px;
+        border-radius: 50%;
+        background-color: #2a9d8f;
+        cursor: pointer;
+    }
+    .checkout{
+        padding: 7px 15px;
+        margin-bottom: 10px;
+    }
+    .pay{
+        padding: 7px 15px;
+        margin-bottom: 10px;
+
+    }
+    .payment{
+        display: flex;
+        align-items: center;
+        gap:5px;
+    }
+    .pizzaListContainer{
+        width: 97%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 10px;
+    }
+    .pizzaList{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border: 1px solid #2a9d8f;
+        border-radius: 5px;
+        background-color: #ff3300;
+        width:98%;
+        height: 100%;
+    }
+}
+.smallPizza,
+.mediumPizza,
+.largePizza{
+    width: 50px;
+}
+[x-cloak]{
+    display: none;
+}
+input{
+    width: 150px;
+    height: 20px;
+}
+@media (max-width:760px){
+    .pizza img{
+        float:right;
+        position: relative;
+        top: -51px;
+    }
+    .options{
+        width: 70%;
+    }
+    .plus-minus{
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+    .pizzaListContainer{
+        width: 97%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
+    
+}
+.pizza:hover{
+    padding-top: 5px;
+    cursor:ponter;
+}
+.highlight{
+    color: #2a9d8f;
+
+}
+.cartContainer{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    justify-content: center;
+    
+}
+.cart{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+.select{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    place-items: center;
+}
+.selectotal{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+
+}
+.plus,
+.minus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #2a9d8f;
+    cursor: pointer;
+}
+.checkout{
+    padding: 7px 15px;
+    margin-bottom: 10px;
+}
+.pay{
+    padding: 7px 15px;
+    margin-bottom: 10px;
+
+}
+.payment{
+    display: flex;
+    align-items: center;
+    gap:5px;
+}
+.pizzaListContainer{
+    width: 97%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+}
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.end {
+    text-align: end;
+}
+.pizzaListContainer .pizzaList:nth-child(even){
+   background-color: #d62828;
+}
+.pizzaList{
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr;
+    place-items: center;
+    place-content: center;
+    border: 1px solid #2a9d8f;
+    border-radius: 5px;
+    background-color: #ff3300;
+    width:100%;
+    height: 100%;
+}
+.priceFlavour{
+    width: 100%;
+}
+.imagePizza{
+    border-radius: 50%;
+}
+.pizzaListBuyButton{
+    width: 80px;
+    height: 30px;
+    justify-content: flex-end;
+}
+table,th,td{
+    border: 2px solid black;
+    border-collapse: collapse;
+    background-color: #2a9d8f;
+}
+.userContainer{
+    width: 100%;
+    color: white;
+
+}
+.username{
+    
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.login{
+    height: 25px;
+}
+.warning{
+    color: #d62828;
+}

@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
   </head>
   <body x-data="AddToCart">
-    <div class="userContainer">
+    <!-- <div class="userContainer">
       <p x-text="loginMessage" class="warning"></p>
       <div class="username">
         <p>username: <input type="text" x-model="username"></p>
@@ -23,12 +23,12 @@
       </div>
       <p x-cloak x-show="cartId">Cart Id: <span x-text="cartId"></span></p>
     </div>
-    <div  x-cloak class="cartContainer"  x-show="username && cartId"  >
+    <div   class="cartContainer"  x-show="username && cartId"  > -->
 
     <h1 >Perfect Pizza</h1>
-    <div  class="cart"  >
+    <div   class="cart" x-show="cartTotal>0" x-cloak>
       <h2  x-text="message" :class="{ 'warning': showWarning }"></h2>
-      <table>
+      <table x-cloak>
         <tr>
           <th >Flavour name</th>
           <th >Size</th>

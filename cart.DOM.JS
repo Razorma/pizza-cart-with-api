@@ -11,27 +11,27 @@ document.addEventListener('alpine:init', () => {
             cartTotal: 0,
             message: "",
             amount: "",
-            login() {
-                if (this.username.length >= 3 && this.username.length <8) {
-                    localStorage["username"] = this.username
-                    this.createCart()
-                } else {
-                    this.loginMessage = "Username should be at least 3 characters and not more than 8 characters"
-                    setTimeout(() => {
-                        this.loginMessage = ""
-                    }, 3000)
-                }
+            // login() {
+            //     if (this.username.length >= 3 && this.username.length <8) {
+            //         localStorage["username"] = this.username
+            //         this.createCart()
+            //     } else {
+            //         this.loginMessage = "Username should be at least 3 characters and not more than 8 characters"
+            //         setTimeout(() => {
+            //             this.loginMessage = ""
+            //         }, 3000)
+            //     }
 
-            },
-            logout() {
-                if (confirm("are you sure you want to logout")) {
-                    this.username = "";
-                    this.cartId = "";
-                    localStorage["cartId"] = "";
-                    localStorage["username"] = "";
-                }
+            // },
+            // logout() {
+            //     if (confirm("are you sure you want to logout")) {
+            //         this.username = "";
+            //         this.cartId = "";
+            //         localStorage["cartId"] = "";
+            //         localStorage["username"] = "";
+            //     }
 
-            },
+            // },
             createCart() {
                 if (!this.username) {
                     return Promise.resolve();

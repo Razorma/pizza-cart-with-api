@@ -4,7 +4,7 @@ document.addEventListener('alpine:init', () => {
             pizzas: [],
             id: 11921,
             cartId: "",
-            username: "",
+            username: "Razorma",
             loginMessage: "",
             showWarning: false,
             cartPizzas: [],

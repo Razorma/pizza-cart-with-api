@@ -18,15 +18,15 @@
       <p x-text="loginMessage" class="warning"></p>
       <div class="username">
         <p>username: <input type="text" x-model="username"></p>
-        <button class="login" @click="login()" x-show="!cartId">login</button>
-        <button class="login" @click="logout()" x-show="username && cartId">logout</button>
+        <button x-cloak class="login" @click="login()" x-show="!cartId" >login</button>
+        <button x-cloak class="login" @click="logout()" x-show="username && cartId">logout</button>
       </div>
-      <p x-show="cartId">Cart Id: <span x-text="cartId"></span></p>
+      <p x-cloak x-show="cartId">Cart Id: <span x-text="cartId"></span></p>
     </div>
-    <div class="cartContainer"  >
+    <div  x-cloak class="cartContainer"  x-show="username && cartId"  >
 
-    <h1 x-show="username && cartId">Perfect Pizza</h1>
-    <div class="cart" x-show="username && cartId">
+    <h1 >Perfect Pizza</h1>
+    <div  class="cart"  >
       <h2  x-text="message" :class="{ 'warning': showWarning }"></h2>
       <table>
         <tr>
@@ -94,7 +94,7 @@
       </div> -->
       
     </div>
-    <div class="pizzaListContainer" x-show="username && cartId">
+    <div x-cloak class="pizzaListContainer" x-show="username && cartId">
       <template x-for="pizza in pizzas"  >
         <div class="pizzaList">
           <div>
@@ -110,13 +110,13 @@
         </div>
     </template>
     </div>
-    <!-- <div class="pizza Contact">
+    <div x-cloak class="pizza Contact" x-show="username && cartId">
       <div class="contacts detailes">
         <h2>Contact Details</h2>
         <p>Contact us at:(021)-541-1000 twitter facebook @perfectpizza</p>
       </div>
       <div class="contacts address">Pizza plaza, Door road, Base town</div>
     </div>
-  </div> -->
+  </div>
   </body>
 </html>

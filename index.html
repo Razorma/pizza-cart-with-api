@@ -18,7 +18,7 @@
       <p x-text="loginMessage" class="warning"></p>
       <div class="username">
         <p>username: <input type="text" x-model="username"></p>
-        <button x-cloak class="login" @click="login()" x-show="!cartId" >login</button>
+        <button  class="login" @click="login()"  >login</button>
         <button x-cloak class="login" @click="logout()" x-show="username && cartId">logout</button>
       </div>
       <p x-cloak x-show="cartId">Cart Id: <span x-text="cartId"></span></p>

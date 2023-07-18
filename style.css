@@ -226,12 +226,12 @@ input{
     align-items: center;
     gap:5px;
 }
-.pizzaListContainer{
+/* .pizzaListContainer{
     width: 97%;
     display: grid;
     grid-template-columns: 1fr;
     grid-row-gap: 10px;
-}
+} */
 .center {
     text-align: center;
     margin-left: auto;

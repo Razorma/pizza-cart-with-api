@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
   </head>
   <body x-data="AddToCart">
-    <!-- <div class="userContainer">
+    <div class="userContainer">
       <p x-text="loginMessage" class="warning"></p>
       <div class="username">
         <p>username: <input type="text" x-model="username"></p>
@@ -23,7 +23,7 @@
       </div>
       <p x-cloak x-show="cartId">Cart Id: <span x-text="cartId"></span></p>
     </div>
-    <div   class="cartContainer"  x-show="username && cartId"  > -->
+    <div   class="cartContainer"  x-show="username && cartId"  >
 
     <h1 >Perfect Pizza</h1>
     <div   class="cart" x-show="cartTotal>0" x-cloak>
@@ -36,7 +36,7 @@
           <th >QTY</th>
           <th >Total</th>
         </tr>
-        <template x-for="pizza in cartPizzas">
+        <template x-for="pizza in cartPizzas" x-show="username && cartId">
           <tr>
             <td x-text="pizza.flavour">Flavour 1</td>
             <td x-text="pizza.size">large</td>
@@ -56,6 +56,10 @@
         </tr>
       </table>
     </div>
+
+    <!-- <template x-for="pizza in featured">
+      <div x-text="pizza.flavour"></div>
+    </template> -->
     <!-- <div class="container" >
       <div class="pizza Small" id="pizza-boxes" >
         <div class="icon">
@@ -94,7 +98,7 @@
       </div> -->
       
     </div>
-    <div class="pizzaListContainer" >
+    <div class="pizzaListContainer" x-show="username && cartId">
       <template x-for="pizza in pizzas"  >
         <div class="pizzaList">
           <div>
@@ -110,7 +114,7 @@
         </div>
     </template>
     </div>
-    <div x-cloak class="pizza Contact">
+    <div x-cloak class="pizza Contact" x-show="username && cartId">
       <div class="contacts detailes">
         <h2>Contact Details</h2>
         <p>Contact us at:(021)-541-1000 twitter facebook @perfectpizza</p>

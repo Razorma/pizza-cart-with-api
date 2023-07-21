@@ -13,9 +13,16 @@ document.addEventListener('alpine:init', () => {
             amount: "",
             featured:[],
             login() {
-                if (this.username.length >= 3 && this.username.length <8) {
+                if (this.username.length >= 3 && this.username.length <14) {
                     localStorage["username"] = this.username
                     this.createCart()
+                    this.featured =[]
+                    this.createFeatured(4)
+                    this.createFeatured(8)
+                    this.createFeatured(14)
+                    this.getFeturedPizzas(this.username)
+                    this.init()
+                    
                 } else {
                     this.loginMessage = "Username should be at least 3 characters and not more than 8 characters"
                     setTimeout(() => {
@@ -50,22 +57,23 @@ document.addEventListener('alpine:init', () => {
                 }
 
             },
-            // createFeatured(number) {
-            //     // if (!this.username) {
-            //     //     return Promise.resolve();
-            //     // }
-            //     const createFeaturedURL = "https://pizza-api.projectcodex.net/api/pizzas/featured"
-            //     // const cartId = localStorage["cartId"]
-            //     // if (cartId) {
-            //     //     this.cartId = cartId
-            //     // } else {
-            //         return axios.post(createFeaturedURL,{
-            //             "username" : this.username,
-	        //             "pizza_id" : number
-            //         })
-            //     // }
+            createFeatured(number) {
+                const createFeaturedURL = "https://pizza-api.projectcodex.net/api/pizzas/featured"
+                    return axios.post(createFeaturedURL,{
+                        "username" : this.username,
+	                    "pizza_id" : number
+                    })
 
-            // },
+            },
+            getFeturedPizzas(username) {
+                if (this.featured.length <= 3) {
+                    return axios.get(`https://pizza-api.projectcodex.net/api/pizzas/featured?username=${username}`)
+                    .then(result => { 
+                        this.featured = result.data.pizzas.slice(0, 3)
+                    })
+                }
+
+            },
             getCart() {
                 const cartURL = `https://pizza-api.projectcodex.net/api/pizza-cart/${this.cartId}/get`
                 return axios.get(cartURL)
@@ -106,10 +114,9 @@ document.addEventListener('alpine:init', () => {
                     .then(result => {
                         this.pizzas = result.data.pizzas
                     })
-                    // axios.get(`https://pizza-api.projectcodex.net/api/pizzas/featured?username=${this.username}`)
-                    // .then(result => {
-                    //     this.featured = result.data.pizzas
-                    // })
+                if (this.username) {
+                    this.getFeturedPizzas(this.username);
+                }
                 if (!this.cartId) {
                     this.createCart()
                 }

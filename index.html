@@ -64,7 +64,7 @@
         <div class="pizza Small" id="pizza-boxes">
           <div class="icon">
             <h2 x-text="pizza.flavour"></h2>
-            <img src="pizza.png" alt="pizza" width="80" class="imagePizza" />
+            <img src="Photos/pizza.png" alt="pizza" width="80" class="imagePizza" />
             <h3 x-text="pizza.price">R48.99</h3>
           </div>
           <button type="button" class="smallPizza" @click="addCurrentPizza(pizza.id)">Buy</button>
@@ -78,7 +78,7 @@
     <template x-for="pizza in pizzas">
       <div class="pizzaList">
         <div>
-          <img src="pizza.png" alt="" width="50px" class="imagePizza">
+          <img src="Photos/pizza.png" alt="" width="50px" class="imagePizza">
         </div>
         <div class="priceFlavour">
           <h3 x-text="pizza.flavour">Name of pizza</h3>

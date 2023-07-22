@@ -63,4 +63,17 @@ content-type: application/json
 	"cart_code" : "gIbzq2uhSz",
 	"amount" : 200
 }
+### Get a list of featured pizzas for a given user
 
+GET https://pizza-api.projectcodex.net/api/pizzas/featured?username=Razorma
+
+
+### add a featured pizzas for a given user
+
+POST https://pizza-api.projectcodex.net/api/pizzas/featured	
+content-type: application/json
+
+{
+	"username" : "Razorma",
+	"pizza_id" : 2
+}

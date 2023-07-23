@@ -21,13 +21,48 @@
     <div class="username">
       <p>username: <input type="text" x-model="username"></p>
       <button class="login" @click="login()" x-show="!cartId">login</button>
-      <button x-cloak class="login" @click="logout()" x-show="username && cartId">logout</button>
+      <button x-cloak class="login" @click="logout();showHistory=false" x-show="username && cartId">logout</button>
     </div>
-    <p x-cloak x-show="cartId">Cart Id: <span x-text="cartId"></span></p>
+    <p x-cloak x-show="cartId" class="cartId">Cart Id: <span x-text="cartId"></span></p>
   </div>
   <div class="cartContainer" x-show="username && cartId">
+    <button x-cloak @click="loadPurchaseHistory();showHistoryData=true;showHistory=true" class="viewHistory">View
+      Purchase History</button>
+    <div class="history" x-show="showHistory">
+      <div class="deleteHistory">
+        <button x-cloak @click="showHistory=false">Back</button>
+        <button x-cloak @click="deletePurchaseHistory()">Delete</button>
+      </div>
+      <h2 x-cloak x-show="showHistoryData" class="center">Purchase History</h2>
+      <h4 x-text="historyError" class="warning"></h4>
+      <ul x-cloak x-show="showHistoryData" class="historyList">
+        <template x-for="purchase in purchaseHistory" :key="purchase.cartId">
+          <li class="historyBox">
+            <strong>Username:</strong> <span x-text="purchase.username"></span><br>
+            <strong>Cart ID:</strong> <span x-text="purchase.cartId"></span><br>
+            <strong>Cart Total:</strong> R <span x-text="purchase.cartTotal"></span><br>
+            <strong>Timestamp:</strong> <span x-text="purchase.timestamp"></span><br>
+            <strong>Paid Amount:</strong> R <span x-text="purchase.paid"></span><br>
+            <strong>Change:</strong> R <span x-text="purchase.change"></span><br>
 
-    <h1>Perfect Pizza</h1>
+            <h4>Pizzas:</h4>
+            <ul>
+              <template x-for="pizza in purchase.cartPizzas" :key="pizza.id">
+                <li class="listOfPurchases">
+                  <strong>Flavour:</strong> <span x-text="pizza.flavour"></span><br>
+                  <strong>Size:</strong> <span x-text="pizza.size"></span><br>
+                  <strong>Price:</strong> R <span x-text="pizza.price.toFixed(2)"></span><br>
+                  <strong>Qty:</strong> <span x-text="pizza.qty"></span><br>
+                  <strong>Total:</strong> R <span x-text="pizza.total.toFixed(2)"></span><br>
+                </li>
+              </template>
+            </ul>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <h1 x-cloak>Perfect Pizza</h1>
     <div class="cart" x-show="cartTotal>0" x-cloak>
       <h2 x-text="message" :class="{ 'warning': showWarning }"></h2>
       <table x-cloak>
@@ -70,8 +105,8 @@
           <button type="button" class="smallPizza" @click="addCurrentPizza(pizza.id)">Buy</button>
           <div x-text="pizza.size"></div>
         </div>
-    </template>
-  </div>
+      </template>
+    </div>
 
   </div>
   <div class="pizzaListContainer" x-show="username && cartId">

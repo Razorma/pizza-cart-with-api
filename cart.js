@@ -25,11 +25,22 @@ document.addEventListener('alpine:init', () => {
                     this.createFeatured(4)
                     this.createFeatured(8)
                     this.createFeatured(14)
+                    this.createFeatured(10)
+                    axios.get("https://pizza-api.projectcodex.net/api/pizzas")
+                        .then(result => {
+                            this.pizzas = result.data.pizzas
+                        })
+                    if (this.username) {
+                        this.getFeturedPizzas(this.username);
+                    }
+                    if (!this.cartId) {
+                        this.createCart()
+                    }
                     this.getFeturedPizzas(this.username)
-                    this.init()
+
 
                 } else {
-                    this.loginMessage = "Username should be at least 3 characters and not more than 8 characters"
+                    this.loginMessage = "Username should be at least 3 characters and not more than 14 characters"
                     setTimeout(() => {
                         this.loginMessage = ""
                     }, 3000)
@@ -71,6 +82,10 @@ document.addEventListener('alpine:init', () => {
 
             },
             getFeturedPizzas(username) {
+                axios.get("https://pizza-api.projectcodex.net/api/pizzas")
+                    .then(result => {
+                        this.pizzas = result.data.pizzas
+                    })
                 if (this.featured.length <= 3) {
                     return axios.get(`https://pizza-api.projectcodex.net/api/pizzas/featured?username=${username}`)
                         .then(result => {
@@ -108,7 +123,7 @@ document.addEventListener('alpine:init', () => {
                     setTimeout(() => {
                         this.historyError = ""
                         this.showHistory = false
-                    }, 3000)
+                    }, 4000)
                 }
                 const storedPurchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
                 const loggedInUserPurchaseHistory = storedPurchaseHistory.filter(purchase => purchase.username === this.username);
@@ -156,8 +171,10 @@ document.addEventListener('alpine:init', () => {
                 if (!this.cartId) {
                     this.createCart()
                 }
+                if (this.username) {
+                    this.showCartData()
+                }
 
-                this.showCartData()
             },
             addCurrentPizza(pizzaId) {
                 this.addPizza(pizzaId)

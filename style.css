@@ -15,6 +15,113 @@ body {
     align-items: center;
     justify-content: center;
 }
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #060242;
+    z-index: 2;
+} 
+
+.logo{
+    width: 4%;
+}
+nav .bi-x{
+    display: none;
+}
+nav .bi-list{
+    display: none;
+}
+@media (max-width: 500px){
+
+    nav .bi{
+        display:block;
+        font-size: 25px;
+    }
+    .navbar ul{
+        background-color: blue;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 200px;
+        height: 40vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+    }
+    nav ul li{
+        display: block;
+        padding-top: 20px;
+    }
+    nav ul .bi-x{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        cursor: pointer;
+    }
+    .bi-list{
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        color: white;
+    }
+    .profile{
+        position: absolute;
+        top: -5px;
+        right: 15px;
+        cursor: pointer;
+    }
+}
+
+.profile{
+    cursor: pointer;
+    margin-right: 5px;
+}
+.nav-list {
+    display: inline-block;
+}
+@media (min-width: 500px){
+    nav ul li{
+        display: inline-block;
+    }
+   
+}
+
+li {
+    list-style: none;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 1rem 1rem;
+}
+
+.navbar ul li a:hover{
+    color: #B30000;
+    ;
+ }
+.logo{
+   margin-left: 5px;
+   font-style: italic;
+   font-size: 20px;
+   font-weight: 900;
+   color: white;
+}
+.p{
+    color: #B30000;
+}
+.bi-person-circle{
+    color: white;
+}
 
 .Contact {
     background-color: #e76f51;
@@ -45,6 +152,7 @@ body {
 
 h1 {
     text-align: center;
+    color: white;
 }
 
 .container {
@@ -215,7 +323,6 @@ input {
         grid-template-columns: 1fr;
         grid-row-gap: 10px;
         place-items: center;
-        /* place-content: center; */
         padding-right: 25px;
     }
 
@@ -349,15 +456,51 @@ td {
 
 .userContainer {
     width: 100%;
+    height: 100vh;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 .username {
     display: flex;
+    flex-direction: column;
+    width: 50%;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     margin-left: 10px;
+}
+.user-box{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+@media only screen and (max-width:760px){
+    .username {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .user-box{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+}
+.user-box label{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+.username button{
+    width: 100px;
+    background-color: #d62828;
 }
 
 .cartId {
@@ -397,6 +540,7 @@ td {
 .viewHistory {
     padding: 5px 2px;
     background-color: #e76f51;
+    margin-top: 50px;
 }
 
 button {

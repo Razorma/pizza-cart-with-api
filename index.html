@@ -17,9 +17,9 @@
 </head>
 
 <body x-data="AddToCart">
-  <header>
+  <header >
     <p class="logo">Pefect<span class="p">Pizza</span></p>
-    <nav class="navbar">
+    <nav class="navbar" x-show="username && cartId">
       <i class="bi bi-list" onclick="openmenu()"></i>
       <ul class="nav-list" id="menu">
         <li class="profile" x-cloak class="login" @click="logout();showHistory=false" x-show="username && cartId"><i class="bi bi-person-circle "onclick="closemenu()"></i></li>
@@ -35,9 +35,9 @@
   <div class="userContainer" x-show="!cartId">
     <div class="username">
       <div class="user-box">
-        <p x-text="loginMessage" class="warning"></p>
+        <p x-text="loginMessage" class="warning mess"></p>
         <label for="username">username:</label>    
-        <input type="text" id="username" x-model="username">
+        <input type="text" id="username" x-model="username" class="usernameInput">
         <button class="login" @click="login()" x-show="!cartId">login</button>
       
       </div>

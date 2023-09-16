@@ -1,4 +1,15 @@
 document.addEventListener('alpine:init', () => {
+        const nameInput = document.querySelector(".usernameInput");
+        nameInput.addEventListener('keydown', function (press) {
+            const letterRegex = /^[a-zA-Z ]*$/;
+            if (!letterRegex.test(press.key)) {
+                document.querySelector('.mess').innerHTML = "Please enter real name of only letters";
+                setTimeout(function () {
+                    document.querySelector('.mess').innerHTML = '';
+                }, 2500)
+                press.preventDefault();
+            }
+        });
     Alpine.data('AddToCart', () => {
         return {
             pizzas: [],
@@ -39,6 +50,11 @@ document.addEventListener('alpine:init', () => {
                     this.getFeturedPizzas(this.username)
 
 
+                }else if(this.username===""){
+                    this.loginMessage = "Please enter username"
+                    setTimeout(() => {
+                        this.loginMessage = ""
+                    }, 3000)
                 } else {
                     this.loginMessage = "Username should be at least 3 characters and not more than 14 characters"
                     setTimeout(() => {

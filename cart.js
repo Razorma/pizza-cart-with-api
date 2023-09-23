@@ -20,6 +20,7 @@ document.addEventListener('alpine:init', () => {
             showWarning: false,
             showHistory: false,
             showHistoryData: false,
+            showLogin: true,
             cartPizzas: [],
             cartTotal: 0,
             message: "",
@@ -48,6 +49,7 @@ document.addEventListener('alpine:init', () => {
                         this.createCart()
                     }
                     this.getFeturedPizzas(this.username)
+                    this.showLogin = false
 
 
                 }else if(this.username===""){
@@ -69,6 +71,7 @@ document.addEventListener('alpine:init', () => {
                     this.cartId = "";
                     localStorage["cartId"] = "";
                     localStorage["username"] = "";
+                    this.showLogin=true;
                 }
 
             },

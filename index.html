@@ -22,7 +22,7 @@
     <nav class="navbar" x-show="username && cartId">
       <i class="bi bi-list" onclick="openmenu()"></i>
       <ul class="nav-list" id="menu">
-        <li class="profile" x-cloak class="login" @click="logout();showHistory=false" x-show="username && cartId"><i class="bi bi-person-circle "onclick="closemenu()"></i></li>
+        <li class="profile" x-cloak class="login" @click="logout();showHistory=false;" x-show="username && cartId"><i class="bi bi-person-circle "onclick="closemenu()"></i></li>
         <i class="bi bi-x" onclick="closemenu()"></i>
         <li onclick="closemenu()"><a href="#Home">Home</a></li>
         <li onclick="closemenu()"><a href="#all">Buy</a></li>
@@ -32,18 +32,18 @@
     </nav>
   </header>
   
-  <div class="userContainer" x-show="!cartId">
-    <div class="username">
-      <div class="user-box">
+  <div x-cloak class="userContainer" x-show="showLogin">
+    <div x-cloak class="username" x-show="!cartId">
+      <div x-cloak class="user-box" x-show="!cartId">
         <p x-text="loginMessage" class="warning mess"></p>
         <label for="username">username:</label>    
         <input type="text" id="username" x-model="username" class="usernameInput">
-        <button class="login" @click="login()" x-show="!cartId">login</button>
+        <button x-cloak class="login" @click="login()" x-show="!cartId">login</button>
       
       </div>
       
     </div>
-    <p x-cloak x-show="cartId" class="cartId">Cart Id: <span x-text="cartId"></span></p>
+    
   </div>
   <div class="cartContainer" x-show="username && cartId">
     <button x-cloak @click="loadPurchaseHistory();showHistoryData=true;showHistory=true" class="viewHistory">View

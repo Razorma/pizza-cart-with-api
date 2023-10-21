@@ -32,7 +32,7 @@
     </nav>
   </header>
   
-  <div x-cloak class="userContainer" x-show="showLogin">
+  <div x-cloak class="userContainer" x-show="showLogin && !cartId">
     <div x-cloak class="username" x-show="!cartId">
       <div x-cloak class="user-box" x-show="!cartId">
         <p x-text="loginMessage" class="warning mess"></p>
@@ -43,117 +43,119 @@
       </div>
       
     </div>
-    
   </div>
-  <div class="cartContainer" x-show="username && cartId">
-    <button x-cloak @click="loadPurchaseHistory();showHistoryData=true;showHistory=true" class="viewHistory">View
-      Purchase History</button>
-    <div class="history" x-show="showHistory">
-      <div class="deleteHistory">
-        <button x-cloak @click="showHistory=false">Back</button>
-        <button x-cloak @click="deletePurchaseHistory()">Delete</button>
+  <main x-show="username && cartId">
+    <div class="cartContainer" >
+      <button x-cloak @click="loadPurchaseHistory();showHistoryData=true;showHistory=true" class="viewHistory">View
+        Purchase History</button>
+      <div class="history" x-show="showHistory">
+        <div class="deleteHistory">
+          <button x-cloak @click="showHistory=false">Back</button>
+          <button x-cloak @click="deletePurchaseHistory()">Delete</button>
+        </div>
+        <h2 x-cloak x-show="showHistoryData" class="center">Purchase History</h2>
+        <h4 x-text="historyError" class="warning"></h4>
+        <ul x-cloak x-show="showHistoryData" class="historyList">
+          <template x-for="purchase in purchaseHistory" :key="purchase.cartId">
+            <li class="historyBox">
+              <strong>Username:</strong> <span x-text="purchase.username"></span><br>
+              <strong>Cart ID:</strong> <span x-text="purchase.cartId"></span><br>
+              <strong>Cart Total:</strong> R <span x-text="purchase.cartTotal"></span><br>
+              <strong>Timestamp:</strong> <span x-text="purchase.timestamp"></span><br>
+              <strong>Paid Amount:</strong> R <span x-text="purchase.paid"></span><br>
+              <strong>Change:</strong> R <span x-text="purchase.change"></span><br>
+  
+              <h4>Pizzas:</h4>
+              <ul>
+                <template x-for="pizza in purchase.cartPizzas" :key="pizza.id">
+                  <li class="listOfPurchases">
+                    <strong>Flavour:</strong> <span x-text="pizza.flavour"></span><br>
+                    <strong>Size:</strong> <span x-text="pizza.size"></span><br>
+                    <strong>Price:</strong> R <span x-text="pizza.price.toFixed(2)"></span><br>
+                    <strong>Qty:</strong> <span x-text="pizza.qty"></span><br>
+                    <strong>Total:</strong> R <span x-text="pizza.total.toFixed(2)"></span><br>
+                  </li>
+                </template>
+              </ul>
+            </li>
+          </template>
+        </ul>
       </div>
-      <h2 x-cloak x-show="showHistoryData" class="center">Purchase History</h2>
-      <h4 x-text="historyError" class="warning"></h4>
-      <ul x-cloak x-show="showHistoryData" class="historyList">
-        <template x-for="purchase in purchaseHistory" :key="purchase.cartId">
-          <li class="historyBox">
-            <strong>Username:</strong> <span x-text="purchase.username"></span><br>
-            <strong>Cart ID:</strong> <span x-text="purchase.cartId"></span><br>
-            <strong>Cart Total:</strong> R <span x-text="purchase.cartTotal"></span><br>
-            <strong>Timestamp:</strong> <span x-text="purchase.timestamp"></span><br>
-            <strong>Paid Amount:</strong> R <span x-text="purchase.paid"></span><br>
-            <strong>Change:</strong> R <span x-text="purchase.change"></span><br>
-
-            <h4>Pizzas:</h4>
-            <ul>
-              <template x-for="pizza in purchase.cartPizzas" :key="pizza.id">
-                <li class="listOfPurchases">
-                  <strong>Flavour:</strong> <span x-text="pizza.flavour"></span><br>
-                  <strong>Size:</strong> <span x-text="pizza.size"></span><br>
-                  <strong>Price:</strong> R <span x-text="pizza.price.toFixed(2)"></span><br>
-                  <strong>Qty:</strong> <span x-text="pizza.qty"></span><br>
-                  <strong>Total:</strong> R <span x-text="pizza.total.toFixed(2)"></span><br>
-                </li>
-              </template>
-            </ul>
-          </li>
-        </template>
-      </ul>
-    </div>
-
-    <h1 x-cloak class="title">Perfect Pizza</h1>
-    <div class="cart" x-show="cartTotal>0" x-cloak>
-      <h2 x-text="message" :class="{ 'warning': showWarning }"></h2>
-      <table x-cloak>
-        <tr>
-          <th>Flavour name</th>
-          <th>Size</th>
-          <th>Price</th>
-          <th>QTY</th>
-          <th>Total</th>
-        </tr>
-        <template x-for="pizza in cartPizzas" x-show="username && cartId">
+  
+      <h1 x-cloak class="title">Perfect Pizza</h1>
+      <div class="cart" x-show="cartTotal>0" x-cloak>
+        <h2 x-text="message" :class="{ 'warning': showWarning }"></h2>
+        <table x-cloak>
           <tr>
-            <td x-text="pizza.flavour">Flavour 1</td>
-            <td x-text="pizza.size">large</td>
-            <td>R<span x-text="pizza.price.toFixed(2)">0.00</span></td>
-            <td class="center"><button @click="addCurrentPizza(pizza.id)">+</button><span
-                x-text="pizza.qty">1</span><button @click="removeCurrentPizza(pizza.id)">-</button></td>
-            <td>R <span x-text="pizza.total.toFixed(2)">0.00</span></td>
+            <th>Flavour name</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>QTY</th>
+            <th>Total</th>
           </tr>
-        </template>
-        <tr>
-          <td colspan="4">Total</td>
-          <td class="end">R <span x-text="cartTotal">0.00</span></td>
-        </tr>
-        <tr>
-          <td colspan="2">Pay now</td>
-          <td colspan="2"><input x-model="amount" type="number"></td>
-          <td colspan="1"><button @click="pay()">Pay</button></td>
-        </tr>
-      </table>
-    </div>
-    <div class="container" id="Home">
-      <template x-for="pizza in featured">
-        <div class="pizza Small" id="pizza-boxes">
-          <div class="icon">
-            <h2 x-text="pizza.flavour"></h2>
-            <img src="Photos/pizza.png" alt="pizza" width="80" class="imagePizza" />
-            <h3 x-text="pizza.price">R48.99</h3>
+          <template x-for="pizza in cartPizzas" x-show="username && cartId">
+            <tr>
+              <td x-text="pizza.flavour">Flavour 1</td>
+              <td x-text="pizza.size">large</td>
+              <td>R<span x-text="pizza.price.toFixed(2)">0.00</span></td>
+              <td class="center"><button @click="addCurrentPizza(pizza.id)">+</button><span
+                  x-text="pizza.qty">1</span><button @click="removeCurrentPizza(pizza.id)">-</button></td>
+              <td>R <span x-text="pizza.total.toFixed(2)">0.00</span></td>
+            </tr>
+          </template>
+          <tr>
+            <td colspan="4">Total</td>
+            <td class="end">R <span x-text="cartTotal">0.00</span></td>
+          </tr>
+          <tr>
+            <td colspan="2">Pay now</td>
+            <td colspan="2"><input x-model="amount" type="number"></td>
+            <td colspan="1"><button @click="pay()">Pay</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="container" id="Home">
+        <template x-for="pizza in featured">
+          <div class="pizza Small" id="pizza-boxes">
+            <div class="icon">
+              <h2 x-text="pizza.flavour"></h2>
+              <img src="Photos/pizza.png" alt="pizza" width="80" class="imagePizza" />
+              <h3 x-text="pizza.price">R48.99</h3>
+            </div>
+            <button type="button" class="smallPizza" @click="addCurrentPizza(pizza.id)">Buy</button>
+            <div x-text="pizza.size"></div>
           </div>
-          <button type="button" class="smallPizza" @click="addCurrentPizza(pizza.id)">Buy</button>
-          <div x-text="pizza.size"></div>
+        </template>
+      </div>
+  
+    </div>
+    <div class="pizzaListContainer" x-show="username && cartId" id="all">
+      <template x-for="pizza in pizzas">
+        <div class="pizzaList">
+          <div>
+            <img src="Photos/pizza.png" alt="" width="50px" class="imagePizza">
+          </div>
+          <div class="priceFlavour">
+            <h3 x-text="pizza.flavour">Name of pizza</h3>
+            <h4 x-text="pizza.size">Size of pizza <h5>R <span x-text="pizza.price">0.00</span></h5>
+            </h4>
+          </div>
+          <div>
+            <button class="pizzaListBuyButton" @click="addCurrentPizza(pizza.id)">Buy</button>
+          </div>
         </div>
       </template>
     </div>
-
-  </div>
-  <div class="pizzaListContainer" x-show="username && cartId" id="all">
-    <template x-for="pizza in pizzas">
-      <div class="pizzaList">
-        <div>
-          <img src="Photos/pizza.png" alt="" width="50px" class="imagePizza">
-        </div>
-        <div class="priceFlavour">
-          <h3 x-text="pizza.flavour">Name of pizza</h3>
-          <h4 x-text="pizza.size">Size of pizza <h5>R <span x-text="pizza.price">0.00</span></h5>
-          </h4>
-        </div>
-        <div>
-          <button class="pizzaListBuyButton" @click="addCurrentPizza(pizza.id)">Buy</button>
-        </div>
+    <div x-cloak class="pizza Contact" x-show="username && cartId" id="contacts">
+      <div class="contacts detailes">
+        <h2>Contact Details</h2>
+        <p>Contact us at:(021)-541-1000 twitter facebook @perfectpizza</p>
       </div>
-    </template>
-  </div>
-  <div x-cloak class="pizza Contact" x-show="username && cartId" id="contacts">
-    <div class="contacts detailes">
-      <h2>Contact Details</h2>
-      <p>Contact us at:(021)-541-1000 twitter facebook @perfectpizza</p>
+      <div class="contacts address">Pizza plaza, Door road, Base town</div>
     </div>
-    <div class="contacts address">Pizza plaza, Door road, Base town</div>
-  </div>
-  </div>
+    </div>
+  </main>
+  
   <script src="cart.js"></script>
   <script>
     var menu = document.getElementById("menu")
